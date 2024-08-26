@@ -1,7 +1,5 @@
 package com.example.materialcalculator.domain
 
-import kotlin.math.exp
-
 
 /**
  * Uses the following grammar
