@@ -19,10 +19,12 @@ class ExpressionEvaluatorTest {
                 ExpressionPart.Op(Operation.MULTIPLY),
                 ExpressionPart.Number(5.0),
                 ExpressionPart.Op(Operation.DIVIDE),
-                ExpressionPart.Number(3.0)
+                ExpressionPart.Number(3.0),
+                ExpressionPart.Op(Operation.PERCENT),
+                ExpressionPart.Number(10.0),
             )
         )
-        assertEquals(evaluator.evaluate(), 4.0, 0.0)
+        assertEquals(evaluator.evaluate(), 8.5, 0.0)
     }
 
     @Test
