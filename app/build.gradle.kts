@@ -22,12 +22,27 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            manifestPlaceholders["appName"] = "MaterialCalculator"
+        }
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            manifestPlaceholders["appName"] = "MaterialCalculator"
+        }
+        // Creating a new build type 'staging'
+        create("staging") {
+            initWith(getByName("debug"))
+            applicationIdSuffix = ".staging"
+            manifestPlaceholders["appName"] = "MaterialCalculator Staging"
         }
     }
     compileOptions {
@@ -73,13 +88,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation (libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
 
-    implementation (libs.material)
-    implementation ("androidx.compose.material3:material3-window-size-class:1.2.1")
+    implementation(libs.material)
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
 
     // Unit Tests
-    testImplementation (libs.androidx.core)
-    testImplementation (libs.junit)
-    testImplementation (libs.truth)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
 }
