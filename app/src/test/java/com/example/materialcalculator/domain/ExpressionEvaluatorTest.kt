@@ -65,4 +65,25 @@ class ExpressionEvaluatorTest {
         assertEquals(evaluator.evaluate(), 9.0, 0.0)
     }
 
+    @Test
+    fun `Complex expression with percentages and parentheses properly evaluated`() {
+        evaluator = ExpressionEvaluator(
+            listOf(
+                ExpressionPart.Number(100.0),
+                ExpressionPart.Op(Operation.ADD),
+                ExpressionPart.Parentheses(ParenthesesType.Opening),
+                ExpressionPart.Number(50.0),
+                ExpressionPart.Op(Operation.SUBTRACT),
+                ExpressionPart.Number(25.0),
+                ExpressionPart.Parentheses(ParenthesesType.Closing),
+                ExpressionPart.Op(Operation.MULTIPLY),
+                ExpressionPart.Number(2.0),
+                ExpressionPart.Op(Operation.PERCENT),
+                ExpressionPart.Number(10.0)
+            )
+        )
+        assertEquals(evaluator.evaluate(), 105.0, 0.0)
+    }
+
+
 }
