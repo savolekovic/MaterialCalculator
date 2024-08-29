@@ -41,8 +41,7 @@ class ExpressionWriter {
         val newExpression = expression.dropLastWhile {
             it in "$operationSymbols(."
         }
-        if (newExpression.isEmpty())
-            return "0"
+        if (newExpression.isEmpty()) return "0"
         return newExpression
     }
 
@@ -66,10 +65,26 @@ class ExpressionWriter {
     }
 
     private fun canEnterOperation(operation: Operation): Boolean {
-        return if (operation in listOf(
-                Operation.ADD, Operation.SUBTRACT
-            )
-        ) expression.isEmpty() || expression.last() in "$operationSymbols()0123456789"
-        else expression.isNotEmpty() || expression.last() in "0123456789)"
+        return if (operation in listOf(Operation.ADD, Operation.SUBTRACT)) {
+            when (operation) {
+                Operation.ADD -> {
+                    expression.isEmpty()
+                            || expression.last() !in operationSymbols
+                            || expression.last() in "()0123456789"
+                }
+
+                Operation.SUBTRACT -> {
+                    expression.isEmpty()
+                            || expression.last() !in operationSymbols
+                            || expression.last() in "()0123456789"
+                }
+
+                else -> {
+                    expression.isEmpty() || expression.last() in "$operationSymbols()0123456789"
+                }
+            }
+
+        } else
+            expression.isNotEmpty() && expression.last() in "0123456789)"
     }
 }

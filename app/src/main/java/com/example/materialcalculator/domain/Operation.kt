@@ -1,7 +1,11 @@
 package com.example.materialcalculator.domain
 
 enum class Operation(val symbol: Char) {
-    ADD('+'), SUBTRACT('-'), MULTIPLY('x'), DIVIDE('/'), PERCENT('%'),
+    ADD('+'),
+    SUBTRACT('-'),
+    MULTIPLY('x'),
+    DIVIDE('/'),
+    PERCENT('%'),
 }
 
 val operationSymbols = Operation.entries.map {
