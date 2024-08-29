@@ -21,7 +21,7 @@ class CalculatorScreenTest {
     }
 
     @Test
-    fun enterExpression_correctResultDisplayed() {
+    fun enterSimpleExpression_correctResultDisplayed() {
         composeRule.onNodeWithText("1").performClick()
         composeRule.onNodeWithText("+").performClick()
         composeRule.onNodeWithText("2").performClick()
@@ -31,7 +31,27 @@ class CalculatorScreenTest {
         composeRule.onNodeWithText("5").performClick()
         composeRule.onNodeWithText("=").performClick()
 
-
         composeRule.onNodeWithText("2.0").assertIsDisplayed()
+    }
+
+    @Test
+    fun enterComplexExpression_correctResultDisplayed() {
+        // Input: (7 + 3) x 4 / 2 % 50 =
+        composeRule.onNodeWithText("()").performClick()
+        composeRule.onNodeWithText("7").performClick()
+        composeRule.onNodeWithText("+").performClick()
+        composeRule.onNodeWithText("3").performClick()
+        composeRule.onNodeWithText("()").performClick()
+        composeRule.onNodeWithText("x").performClick()
+        composeRule.onNodeWithText("4").performClick()
+        composeRule.onNodeWithText("÷").performClick()
+        composeRule.onNodeWithText("2").performClick()
+        composeRule.onNodeWithText("%").performClick()
+        composeRule.onNodeWithText("5").performClick()
+        composeRule.onNodeWithText("0").performClick()
+        composeRule.onNodeWithText("=").performClick()
+
+        // Verify the result is displayed correctly
+        composeRule.onNodeWithText("10.0").assertIsDisplayed()
     }
 }
